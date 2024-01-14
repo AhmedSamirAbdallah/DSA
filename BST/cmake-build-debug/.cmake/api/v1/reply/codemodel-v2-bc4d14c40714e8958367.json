@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ahmed/Desktop/CP/dsa/DSA/BST/cmake-build-debug",
-		"source" : "/home/ahmed/Desktop/CP/dsa/DSA/BST"
+		"build" : "/home/ahmed/Desktop/CP/github repos/DSA/BST/cmake-build-debug",
+		"source" : "/home/ahmed/Desktop/CP/github repos/DSA/BST"
 	},
 	"version" : 
 	{

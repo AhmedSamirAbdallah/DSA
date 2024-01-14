@@ -15,11 +15,14 @@ struct node {
 };
 
 class BST {
-    node *root = nullptr;
 private:
+    node *root = nullptr;
+    int _size_ = 0;
+
     void insert_val(node *&cur, int val) {
         if (cur == nullptr) {
             cur = new node(val);
+            _size_++;
             return;
         }
         if (cur->val < val) {
@@ -69,7 +72,7 @@ private:
                 delete cur;
                 cur = child;
             }
-
+            _size_--;
         }
     }
 
@@ -84,6 +87,10 @@ public:
 
     void erase(int val) {
         erase_val(root, val);
+    }
+
+    int size() {
+        return _size_;
     }
 };
 
@@ -103,7 +110,7 @@ int main() {
     test.insert(1);
     test.insert(-1);
     test.erase(4);
+    printf("%d\n", test.size());
 
-    printf("%d\n", test.find(0));
     return 0;
 }
