@@ -28,7 +28,7 @@ private:
 
     bool _find_(node *&cur, int val);
 
-    void _erase_(node *&cur, int val);
+    bool _erase_(node *&cur, int val);
 
     void _traverse_inorder_(node *cur);
 

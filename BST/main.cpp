@@ -10,7 +10,6 @@ int main() {
     test.insert(13);
     test.insert(4);
     test.insert(7);
-    test.insert(7);
 //    test.insert(0);
 //    test.insert(2);
 //    test.insert(10);
@@ -22,6 +21,9 @@ int main() {
 //    test.insert(-1);
 //    test.erase(4);
     printf("%d\n", test.size());
+    test.traverse_inorder();
+    test.erase(7);
+    puts("");
     test.traverse_inorder();
 
 

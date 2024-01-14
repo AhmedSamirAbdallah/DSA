@@ -41,14 +41,18 @@ bool BST::_find_(node *&cur, int val) {
     }
 }
 
-void BST::_erase_(node *&cur, int val) {
+bool BST::_erase_(node *&cur, int val) {
     if (cur == nullptr) {
-        return;
+        return false;
     }
     if (cur->val < val) {
-        _erase_(cur->right, val);
+        bool can_erase = _erase_(cur->right, val);
+        cur->subtree_size -= can_erase;
+        return can_erase;
     } else if (cur->val > val) {
-        _erase_(cur->left, val);
+        bool can_erase = _erase_(cur->left, val);
+        cur->subtree_size -= can_erase;
+        return can_erase;
     } else {
         if (cur->right && cur->left) {
             node *min_right_subtree = cur->right;
@@ -69,6 +73,7 @@ void BST::_erase_(node *&cur, int val) {
             cur = child;
         }
         _size_--;
+        return true;
     }
 }
 
