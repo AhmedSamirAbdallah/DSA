@@ -10,17 +10,20 @@ int main() {
     test.insert(13);
     test.insert(4);
     test.insert(7);
-    test.insert(0);
-    test.insert(2);
-    test.insert(10);
-    test.insert(8);
-    test.insert(9);
-    test.insert(11);
-    test.insert(6);
-    test.insert(1);
-    test.insert(-1);
-    test.erase(4);
+    test.insert(7);
+//    test.insert(0);
+//    test.insert(2);
+//    test.insert(10);
+//    test.insert(8);
+//    test.insert(9);
+//    test.insert(11);
+//    test.insert(6);
+//    test.insert(1);
+//    test.insert(-1);
+//    test.erase(4);
     printf("%d\n", test.size());
+    test.traverse_inorder();
+
 
     return 0;
 }

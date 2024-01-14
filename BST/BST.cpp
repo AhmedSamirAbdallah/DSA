@@ -1,48 +1,54 @@
 //
 // Created by ahmed on 14/01/24.
 //
+#include<iostream>
 #include "BST.h"
-
 
 node::node() : left(nullptr), right(nullptr), val(0), subtree_size(1) {}
 
 node::node(int val) : left(nullptr), right(nullptr), val(val), subtree_size(1) {}
 
 
-void BST::insert_val(node *&cur, int val) {
+bool BST::_insert_(node *&cur, int val) {
     if (cur == nullptr) {
         cur = new node(val);
         _size_++;
-        return;
+        return true;
     }
     if (cur->val < val) {
-        insert_val(cur->right, val);
+        bool can_insert = _insert_(cur->right, val);
+        cur->subtree_size += can_insert;
+        return can_insert;
     } else if (cur->val > val) {
-        insert_val(cur->left, val);
+        bool can_insert = _insert_(cur->left, val);
+        cur->subtree_size += can_insert;
+        return can_insert;
+    } else {
+        return false;
     }
 }
 
-bool BST::find_val(node *&cur, int val) {
+bool BST::_find_(node *&cur, int val) {
     if (cur == nullptr) {
         return false;
     }
     if (cur->val < val) {
-        return find_val(cur->right, val);
+        return _find_(cur->right, val);
     } else if (cur->val > val) {
-        return find_val(cur->left, val);
+        return _find_(cur->left, val);
     } else {
         return true;
     }
 }
 
-void BST::erase_val(node *&cur, int val) {
+void BST::_erase_(node *&cur, int val) {
     if (cur == nullptr) {
         return;
     }
     if (cur->val < val) {
-        erase_val(cur->right, val);
+        _erase_(cur->right, val);
     } else if (cur->val > val) {
-        erase_val(cur->left, val);
+        _erase_(cur->left, val);
     } else {
         if (cur->right && cur->left) {
             node *min_right_subtree = cur->right;
@@ -66,18 +72,30 @@ void BST::erase_val(node *&cur, int val) {
     }
 }
 
+void BST::_traverse_inorder_(node *cur) {
+    if (cur == nullptr)return;
+    printf("node : %d | comp = %d\n", cur->val, cur->subtree_size);
+    _traverse_inorder_(cur->right);
+    _traverse_inorder_(cur->left);
+
+}
+
 void BST::insert(int val) {
-    insert_val(root, val);
+    _insert_(root, val);
 }
 
 bool BST::find(int val) {
-    return find_val(root, val);
+    return _find_(root, val);
 }
 
 void BST::erase(int val) {
-    erase_val(root, val);
+    _erase_(root, val);
 }
 
 int BST::size() {
     return _size_;
+}
+
+void BST::traverse_inorder() {
+    _traverse_inorder_(root);
 }

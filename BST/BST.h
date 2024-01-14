@@ -23,12 +23,14 @@ private:
     node *root = nullptr;
     int _size_ = 0;
 
-    void insert_val(node *&cur, int val);
+    bool _insert_(node *&cur, int val);
 
 
-    bool find_val(node *&cur, int val);
+    bool _find_(node *&cur, int val);
 
-    void erase_val(node *&cur, int val);
+    void _erase_(node *&cur, int val);
+
+    void _traverse_inorder_(node *cur);
 
 public:
     void insert(int val);
@@ -38,4 +40,6 @@ public:
     void erase(int val);
 
     int size();
+
+    void traverse_inorder();
 };
