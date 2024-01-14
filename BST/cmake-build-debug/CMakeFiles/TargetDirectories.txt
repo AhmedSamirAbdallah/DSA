@@ -1,0 +1,3 @@
+/home/ahmed/Desktop/CP/dsa/DSA/BST/cmake-build-debug/CMakeFiles/BST.dir
+/home/ahmed/Desktop/CP/dsa/DSA/BST/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ahmed/Desktop/CP/dsa/DSA/BST/cmake-build-debug/CMakeFiles/rebuild_cache.dir
