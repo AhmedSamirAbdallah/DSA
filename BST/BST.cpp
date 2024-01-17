@@ -4,27 +4,21 @@
 #include<iostream>
 #include "BST.h"
 
-node::node() : left(nullptr), right(nullptr), val(0), subtree_size(1) {}
+node::node() : left(nullptr), right(nullptr), val(0) {}
 
-node::node(int val) : left(nullptr), right(nullptr), val(val), subtree_size(1) {}
+node::node(int val) : left(nullptr), right(nullptr), val(val) {}
 
 
-bool BST::_insert_(node *&cur, int val) {
+void BST::_insert_(node *&cur, int val) {
     if (cur == nullptr) {
         cur = new node(val);
         _size_++;
-        return true;
+        return;
     }
     if (cur->val < val) {
-        bool can_insert = _insert_(cur->right, val);
-        cur->subtree_size += can_insert;
-        return can_insert;
+        _insert_(cur->right, val);
     } else if (cur->val > val) {
-        bool can_insert = _insert_(cur->left, val);
-        cur->subtree_size += can_insert;
-        return can_insert;
-    } else {
-        return false;
+        _insert_(cur->left, val);
     }
 }
 
@@ -41,45 +35,41 @@ bool BST::_find_(node *&cur, int val) {
     }
 }
 
-bool BST::_erase_(node *&cur, int val) {
+void BST::_erase_(node *&cur, int val) {
     if (cur == nullptr) {
-        return false;
+        return;
     }
     if (cur->val < val) {
-        bool can_erase = _erase_(cur->right, val);
-        cur->subtree_size -= can_erase;
-        return can_erase;
+        _erase_(cur->right, val);
     } else if (cur->val > val) {
-        bool can_erase = _erase_(cur->left, val);
-        cur->subtree_size -= can_erase;
-        return can_erase;
+        _erase_(cur->left, val);
     } else {
         if (cur->right && cur->left) {
-            node *min_right_subtree = cur->right;
             node *parent = cur;
+            node *min_right_subtree = cur->right;
             while (min_right_subtree->left) {
                 parent = min_right_subtree;
                 min_right_subtree = min_right_subtree->left;
             }
-            parent->left = (min_right_subtree->right) ? min_right_subtree->right : nullptr;
-            node *temp = min_right_subtree;
-            temp->left = cur->left;
-            if (cur->right != min_right_subtree)temp->right = cur->right;
-            delete cur;
-            cur = temp;
+            node *child = min_right_subtree->right;
+            cur->val = min_right_subtree->val;
+            delete min_right_subtree;
+            (parent == cur) ? parent->right = child : parent->left = child;
+            /*
+                min_right_subtree = child  ----> not working because min_right_subtree is a copy not the reference one
+             */
         } else {
             node *child = (cur->right) ? cur->right : cur->left;
             delete cur;
             cur = child;
         }
         _size_--;
-        return true;
     }
 }
 
 void BST::_traverse_inorder_(node *cur) {
     if (cur == nullptr)return;
-    printf("node : %d | comp = %d\n", cur->val, cur->subtree_size);
+    printf("%d\n", cur->val);
     _traverse_inorder_(cur->right);
     _traverse_inorder_(cur->left);
 

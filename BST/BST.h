@@ -10,7 +10,6 @@
 struct node {
     node *left, *right;
     int val;
-    int subtree_size;
 
     node();
 
@@ -23,12 +22,12 @@ private:
     node *root = nullptr;
     int _size_ = 0;
 
-    bool _insert_(node *&cur, int val);
+    void _insert_(node *&cur, int val);
 
 
     bool _find_(node *&cur, int val);
 
-    bool _erase_(node *&cur, int val);
+    void _erase_(node *&cur, int val);
 
     void _traverse_inorder_(node *cur);
 
