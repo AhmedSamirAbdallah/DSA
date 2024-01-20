@@ -4,12 +4,17 @@
 #include<iostream>
 #include "BST.h"
 
-node::node() : left(nullptr), right(nullptr), val(0) {}
+template<typename T>
+node<T>::node() : left(nullptr), right(nullptr) {}
 
-node::node(int val) : left(nullptr), right(nullptr), val(val) {}
+template<typename T>
+node<T>::node(T val) : left(nullptr), right(nullptr), val(val) {}
 
+template<typename T>
+BST<T>::BST() : root(nullptr), _size_(0) {}
 
-void BST::_insert_(node *&cur, int val) {
+template<typename T>
+void BST<T>::_insert_(node<T> *&cur, T val) {
     if (cur == nullptr) {
         cur = new node(val);
         _size_++;
@@ -22,7 +27,8 @@ void BST::_insert_(node *&cur, int val) {
     }
 }
 
-bool BST::_find_(node *&cur, int val) {
+template<typename T>
+bool BST<T>::_find_(node<T> *&cur, T val) {
     if (cur == nullptr) {
         return false;
     }
@@ -35,7 +41,8 @@ bool BST::_find_(node *&cur, int val) {
     }
 }
 
-void BST::_erase_(node *&cur, int val) {
+template<typename T>
+void BST<T>::_erase_(node<T> *&cur, T val) {
     if (cur == nullptr) {
         return;
     }
@@ -45,13 +52,13 @@ void BST::_erase_(node *&cur, int val) {
         _erase_(cur->left, val);
     } else {
         if (cur->right && cur->left) {
-            node *parent = cur;
-            node *min_right_subtree = cur->right;
+            node<T> *parent = cur;
+            node<T> *min_right_subtree = cur->right;
             while (min_right_subtree->left) {
                 parent = min_right_subtree;
                 min_right_subtree = min_right_subtree->left;
             }
-            node *child = min_right_subtree->right;
+            node<T> *child = min_right_subtree->right;
             cur->val = min_right_subtree->val;
             delete min_right_subtree;
             (parent == cur) ? parent->right = child : parent->left = child;
@@ -59,7 +66,7 @@ void BST::_erase_(node *&cur, int val) {
                 min_right_subtree = child  ----> not working because min_right_subtree is a copy not the reference one
              */
         } else {
-            node *child = (cur->right) ? cur->right : cur->left;
+            node<T> *child = (cur->right) ? cur->right : cur->left;
             delete cur;
             cur = child;
         }
@@ -67,30 +74,36 @@ void BST::_erase_(node *&cur, int val) {
     }
 }
 
-void BST::_traverse_inorder_(node *cur) {
+template<typename T>
+void BST<T>::_traverse_inorder_(node<T> *cur) {
     if (cur == nullptr)return;
-    printf("%d\n", cur->val);
+    std::cout << cur->val<<"\n";
     _traverse_inorder_(cur->right);
     _traverse_inorder_(cur->left);
 
 }
 
-void BST::insert(int val) {
+template<typename T>
+void BST<T>::insert(T val) {
     _insert_(root, val);
 }
 
-bool BST::find(int val) {
+template<typename T>
+bool BST<T>::find(T val) {
     return _find_(root, val);
 }
 
-void BST::erase(int val) {
+template<typename T>
+void BST<T>::erase(T val) {
     _erase_(root, val);
 }
 
-int BST::size() {
+template<typename T>
+int BST<T>::size() {
     return _size_;
 }
 
-void BST::traverse_inorder() {
+template<typename T>
+void BST<T>::traverse_inorder() {
     _traverse_inorder_(root);
 }

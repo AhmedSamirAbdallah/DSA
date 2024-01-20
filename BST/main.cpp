@@ -5,15 +5,10 @@ using namespace std;
 
 
 int main() {
-    BST test;
-    test.insert(9);
-    test.insert(20);
-    test.insert(5);
-    test.insert(1);
-
-    test.erase(5);
+    BST<string> test;
+    test.insert("bbb");
+    test.insert("aaa");
+    test.insert("ccc");
     test.traverse_inorder();
-
-
     return 0;
 }

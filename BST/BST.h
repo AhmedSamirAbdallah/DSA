@@ -7,38 +7,49 @@
 
 #endif //BST_BST_H
 
+template<typename T>
 struct node {
     node *left, *right;
-    int val;
+    T val;
 
     node();
 
-    node(int val);
+    node(T val);
 };
 
-
+template<typename T>
 class BST {
 private:
-    node *root = nullptr;
+    node<T> *root = nullptr;
     int _size_ = 0;
 
-    void _insert_(node *&cur, int val);
+    void _insert_(node<T> *&cur, T val);
+
+    bool _find_(node<T> *&cur, T val);
 
 
-    bool _find_(node *&cur, int val);
+    void _erase_(node<T> *&cur, T val);
 
-    void _erase_(node *&cur, int val);
-
-    void _traverse_inorder_(node *cur);
+    void _traverse_inorder_(node<T> *cur);
 
 public:
-    void insert(int val);
 
-    bool find(int val);
+    BST();
 
-    void erase(int val);
+    void insert(T val);
+
+    bool find(T val);
+
+    void erase(T val);
 
     int size();
 
     void traverse_inorder();
 };
+
+template class BST<int>;
+template class BST<float>;
+template class BST<char>;
+template class BST<std::string>;
+
+
