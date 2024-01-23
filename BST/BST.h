@@ -12,9 +12,7 @@ struct node {
     node *left, *right;
     T val;
 
-    node();
-
-    node(T val);
+    node(T val = T());
 };
 
 template<typename T>
@@ -47,9 +45,25 @@ public:
     void traverse_inorder();
 };
 
-template class BST<int>;
-template class BST<float>;
-template class BST<char>;
-template class BST<std::string>;
+template
+class BST<int>;
+
+template
+class BST<long>;
+
+template
+class BST<long long>;
+
+template
+class BST<double>;
+
+template
+class BST<float>;
+
+template
+class BST<char>;
+
+template
+class BST<std::string>;
 
 

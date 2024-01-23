@@ -5,9 +5,6 @@
 #include "BST.h"
 
 template<typename T>
-node<T>::node() : left(nullptr), right(nullptr) {}
-
-template<typename T>
 node<T>::node(T val) : left(nullptr), right(nullptr), val(val) {}
 
 template<typename T>
@@ -77,9 +74,9 @@ void BST<T>::_erase_(node<T> *&cur, T val) {
 template<typename T>
 void BST<T>::_traverse_inorder_(node<T> *cur) {
     if (cur == nullptr)return;
+    _traverse_inorder_(cur->left);
     std::cout << cur->val<<"\n";
     _traverse_inorder_(cur->right);
-    _traverse_inorder_(cur->left);
 
 }
 
