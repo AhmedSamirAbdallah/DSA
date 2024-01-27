@@ -14,5 +14,8 @@ int main() {
     test.insert(18);
     test.insert(20);
     test.traverse_inorder();
+    test.erase(10);
+    puts("");
+    test.traverse_inorder();
     return 0;
 }

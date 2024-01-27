@@ -100,6 +100,7 @@ void BST<T>::_erase_(node<T> *&cur, T val) {
             cur = child;
         }
         _size_--;
+        cur->update_height();
     }
 }
 
