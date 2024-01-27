@@ -4,11 +4,42 @@
 #include<iostream>
 #include "BST.h"
 
+using namespace std;
+
 template<typename T>
-node<T>::node(T val) : left(nullptr), right(nullptr), val(val) {}
+node<T>::node(T val) : left(nullptr), right(nullptr), val(val), height(0) {}
+
+template<typename T>
+void node<T>::update_height() {
+    height = max((left ? left->height : 0), (right ? right->height : 0)) + 1;
+}
 
 template<typename T>
 BST<T>::BST() : root(nullptr), _size_(0) {}
+
+
+template<typename T>
+void BST<T>::rotate_left(node<T> *&cur) {
+    node<T> *y = cur;
+    node<T> *x = cur->right;
+    y->right = x->left;
+    x->left = y;
+    y->update_height();
+    x->update_height();
+    cur = x;
+}
+
+template<typename T>
+void BST<T>::rotate_right(node<T> *&cur) {
+    node<T> *x = cur;
+    node<T> *y = cur->left;
+    x->left = y->right;
+    y->right = x;
+    x->update_height();
+    y->update_height();
+    cur = y;
+}
+
 
 template<typename T>
 void BST<T>::_insert_(node<T> *&cur, T val) {
@@ -22,6 +53,7 @@ void BST<T>::_insert_(node<T> *&cur, T val) {
     } else if (cur->val > val) {
         _insert_(cur->left, val);
     }
+    cur->update_height();
 }
 
 template<typename T>
@@ -74,10 +106,9 @@ void BST<T>::_erase_(node<T> *&cur, T val) {
 template<typename T>
 void BST<T>::_traverse_inorder_(node<T> *cur) {
     if (cur == nullptr)return;
+    std::cout << cur->val << "    " << cur->height << "\n";
     _traverse_inorder_(cur->left);
-    std::cout << cur->val<<"\n";
     _traverse_inorder_(cur->right);
-
 }
 
 template<typename T>

@@ -7,14 +7,12 @@ using namespace std;
 int main() {
     BST<int> test;
     test.insert(10);
-    test.insert(8);
+    test.insert(5);
     test.insert(15);
-    test.insert(6);
-    test.insert(9);
-    test.insert(12);
-    test.insert(16);
-
-
+    test.insert(14);
+    test.insert(19);
+    test.insert(18);
+    test.insert(20);
     test.traverse_inorder();
     return 0;
 }

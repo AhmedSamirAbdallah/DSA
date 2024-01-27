@@ -11,8 +11,11 @@ template<typename T>
 struct node {
     node *left, *right;
     T val;
+    int height;
 
     node(T val = T());
+
+    void update_height();
 };
 
 template<typename T>
@@ -21,28 +24,33 @@ private:
     node<T> *root = nullptr;
     int _size_ = 0;
 
-    void _insert_(node<T> *&cur, T val);
+    void _insert_(node<T> *&, T);
 
-    bool _find_(node<T> *&cur, T val);
+    bool _find_(node<T> *&, T);
 
+    void _erase_(node<T> *&, T);
 
-    void _erase_(node<T> *&cur, T val);
+    void _traverse_inorder_(node<T> *);
 
-    void _traverse_inorder_(node<T> *cur);
+    void rotate_left(node<T> *&);
+
+    void rotate_right(node<T> *&);
+
 
 public:
 
     BST();
 
-    void insert(T val);
+    void insert(T);
 
-    bool find(T val);
+    bool find(T);
 
-    void erase(T val);
+    void erase(T);
 
     int size();
 
     void traverse_inorder();
+
 };
 
 template
