@@ -11,11 +11,8 @@ int main() {
     test.insert(15);
     test.insert(14);
     test.insert(19);
-    test.insert(18);
+    test.insert(13);
     test.insert(20);
-    test.traverse_inorder();
-    test.erase(10);
-    puts("");
     test.traverse_inorder();
     return 0;
 }

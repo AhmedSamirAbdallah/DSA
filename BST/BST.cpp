@@ -15,6 +15,11 @@ void node<T>::update_height() {
 }
 
 template<typename T>
+int node<T>::get_balance_factor() {
+    return (left ? left->height : 0) - (right ? right->height : 0);
+}
+
+template<typename T>
 BST<T>::BST() : root(nullptr), _size_(0) {}
 
 
@@ -40,6 +45,21 @@ void BST<T>::rotate_right(node<T> *&cur) {
     cur = y;
 }
 
+template<typename T>
+void BST<T>::balance(node<T> *&cur, T val) {
+    int bf = cur->get_balance_factor();
+    if (bf < -1 && val > cur->right->val) {
+        rotate_left(cur);
+    } else if (bf < -1 && val < cur->right->val) {
+        rotate_right(cur->right);
+        rotate_left(cur);
+    } else if (bf > 1 && val < cur->right->val) {
+        rotate_right(cur);
+    } else if (bf > 1 && val > cur->right->val) {
+        rotate_left(cur->left);
+        rotate_right(cur);
+    }
+}
 
 template<typename T>
 void BST<T>::_insert_(node<T> *&cur, T val) {
@@ -54,6 +74,7 @@ void BST<T>::_insert_(node<T> *&cur, T val) {
         _insert_(cur->left, val);
     }
     cur->update_height();
+    balance(cur, val);
 }
 
 template<typename T>
@@ -101,6 +122,7 @@ void BST<T>::_erase_(node<T> *&cur, T val) {
         }
         _size_--;
         cur->update_height();
+        balance(cur, val);
     }
 }
 

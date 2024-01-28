@@ -16,6 +16,8 @@ struct node {
     node(T val = T());
 
     void update_height();
+
+    int get_balance_factor();
 };
 
 template<typename T>
@@ -35,6 +37,8 @@ private:
     void rotate_left(node<T> *&);
 
     void rotate_right(node<T> *&);
+
+    void balance(node<T> *&, T);
 
 
 public:
