@@ -32,6 +32,8 @@ private:
 
     void _erase_(node<T> *&, T);
 
+    void _clear(node<T> *&);
+
     void _traverse_inorder_(node<T> *);
 
     void rotate_left(node<T> *&);
@@ -52,6 +54,8 @@ public:
     void erase(T);
 
     int size();
+
+    void clear();
 
     void traverse_inorder();
 

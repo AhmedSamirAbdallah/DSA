@@ -127,9 +127,17 @@ void BST<T>::_erase_(node<T> *&cur, T val) {
 }
 
 template<typename T>
+void BST<T>::_clear(node<T> *&cur) {
+    if (cur == nullptr)return;
+    _clear(cur->left);
+    _clear(cur->right);
+    delete cur;
+    cur = nullptr;
+}
+
+template<typename T>
 void BST<T>::_traverse_inorder_(node<T> *cur) {
     if (cur == nullptr)return;
-    std::cout << cur->val << "    " << cur->height << "\n";
     _traverse_inorder_(cur->left);
     _traverse_inorder_(cur->right);
 }
@@ -152,6 +160,11 @@ void BST<T>::erase(T val) {
 template<typename T>
 int BST<T>::size() {
     return _size_;
+}
+
+template<typename T>
+void BST<T>::clear() {
+    _clear(root);
 }
 
 template<typename T>
