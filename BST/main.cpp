@@ -14,8 +14,7 @@ int main() {
     test.insert(13);
     test.insert(20);
     test.traverse_inorder();
-    test.clear();
-    test.traverse_inorder();
+    printf("%d\n", test.lower_bound(21));
 
     return 0;
 }

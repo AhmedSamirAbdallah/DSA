@@ -136,8 +136,21 @@ void BST<T>::_clear(node<T> *&cur) {
 }
 
 template<typename T>
+node<T> *BST<T>::_lower_bound(node<T> *&cur, T val) {
+    if (cur == nullptr)return nullptr;
+    if (cur->val >= val) {
+        node<T> *temp = _lower_bound(cur->left, val);
+        return temp == nullptr ? cur : temp;
+    } else {
+        return _lower_bound(cur->right, val);
+    }
+}
+
+template<typename T>
 void BST<T>::_traverse_inorder_(node<T> *cur) {
     if (cur == nullptr)return;
+    printf("%d %d %d\n", cur->val, cur->height,
+           ((cur->left) ? cur->left->height : 0) - ((cur->right) ? cur->right->height : 0));
     _traverse_inorder_(cur->left);
     _traverse_inorder_(cur->right);
 }
@@ -160,6 +173,11 @@ void BST<T>::erase(T val) {
 template<typename T>
 int BST<T>::size() {
     return _size_;
+}
+
+template<typename T>
+node<T> *BST<T>::lower_bound(T val) {
+    return _lower_bound(root, val);
 }
 
 template<typename T>

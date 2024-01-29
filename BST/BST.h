@@ -42,6 +42,8 @@ private:
 
     void balance(node<T> *&, T);
 
+    node<T> *_lower_bound(node<T> *&, T);
+
 
 public:
 
@@ -59,6 +61,7 @@ public:
 
     void traverse_inorder();
 
+    node<T> *lower_bound(T);
 };
 
 template
@@ -81,5 +84,6 @@ class BST<char>;
 
 template
 class BST<std::string>;
+
 
 
